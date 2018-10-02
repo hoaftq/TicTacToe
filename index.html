@@ -1,0 +1,41 @@
+<html>
+
+<head>
+    <script src="game.logic.js"></script>
+    <script src="game.js"></script>
+
+    <style>
+        .ttt-board {
+            display: grid;
+            grid-template-columns: auto auto auto;
+            grid-gap: 1vw;
+            justify-content: center;
+            align-content: center;
+            background-color: lightgray;
+            user-select: none;
+            font-family:sans-serif;
+        }
+
+        .ttt-board div {
+            background-color: lightskyblue;
+            font-size: 10vw;
+            width: 15vw;
+            height: 15vw;
+            display: grid;
+            justify-content: center;
+            align-content: center;
+            cursor:pointer;
+        }
+    </style>
+
+</head>
+
+<body>
+    <script>
+        var game = new TTTGame();
+        game.createView(document.body);
+
+    </script>
+</body>
+
+</html>
