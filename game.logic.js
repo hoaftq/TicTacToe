@@ -1,26 +1,40 @@
-"use strict";
+// TicTacToe - Pure JavaScript 
+// Write by Trac Quang Hoa, 2018
 
+"use strict";
 const EMPTY_STATE = '';
 const X_STATE = 'x';
 const O_STATE = 'O';
 
-const HORIZONTAL = 1;
-const VERTICAL = 2;
-const TOPLEFT_BOTTOMRIGHT = 3;
-const BOTTOMLEFT_TOPRIGHT = 4;
+const NORMAL_DEEP = 2;
+const HARD_DEEP = 3;
+
+const ROW_FULL = '-';
+const COLUMN_FULL = '|';
+const TOPLEFT_FULL = '\\';
+const BOTTOMLEFT_FULL = '/';
 
 const SIZE = 3;
 
-function TTTGameLogic() {
-    // this.cells = Array(SIZE).fill(Array(SIZE).fill(EMPTY_STATE));
+function TTTGameLogic(deep) {
     this.cells = [
         [EMPTY_STATE, EMPTY_STATE, EMPTY_STATE],
         [EMPTY_STATE, EMPTY_STATE, EMPTY_STATE],
         [EMPTY_STATE, EMPTY_STATE, EMPTY_STATE]
     ];
+
+    this.deep = deep ? deep : NORMAL_DEEP;
 }
 
 TTTGameLogic.prototype = {
+
+    clear: function () {
+        for (let i = 0; i < SIZE; i++) {
+            for (let j = 0; j < SIZE; j++) {
+                this.cells[i][j] = EMPTY_STATE;
+            }
+        }
+    },
 
     getBestCellFor: function (state) {
         var cell;
@@ -35,24 +49,23 @@ TTTGameLogic.prototype = {
                     max = val;
                     cell = { x, y };
 
-                    // // Finish the loop
-                    // if(max === Infinity){
-                    //     return true;
-                    // }
+                    // Finish the loop
+                    if (max === Infinity) {
+                        return true;
+                    }
                 }
             });
         } else {
-            alert('x');
             this.loopEmptyCells((x, y) => {
                 let val = this.evalO(x, y, 0);
                 if (min >= val) {
                     min = val;
                     cell = { x, y };
 
-                    // // Finish the loop
-                    // if(min === -Infinity){
-                    //     return true;
-                    // }
+                    // Finish the loop
+                    if (min === -Infinity) {
+                        return true;
+                    }
                 }
             });
         }
@@ -61,7 +74,7 @@ TTTGameLogic.prototype = {
     },
 
     evalX: function (x, y, level) {
-        if (level > 2) {
+        if (level > this.deep) {
             return 0;
         }
 
@@ -76,9 +89,9 @@ TTTGameLogic.prototype = {
             let val = Infinity;
             let countEmptyCell = this.loopEmptyCells((i, j) => {
                 val = Math.min(val, this.evalO(i, j, level + 1));
-                // if(val == -Infinity){
-                //     return true;
-                // }
+                if (val == -Infinity) {
+                    return true;
+                }
             });
 
             ret = countEmptyCell > 0 ? val : 0;
@@ -91,7 +104,7 @@ TTTGameLogic.prototype = {
     },
 
     evalO: function (x, y, level) {
-        if (level > 2) {
+        if (level > this.deep) {
             return 0;
         }
 
@@ -106,9 +119,9 @@ TTTGameLogic.prototype = {
             let val = -Infinity;
             var countEmptyCell = this.loopEmptyCells((i, j) => {
                 val = Math.max(val, this.evalX(i, j, level + 1));
-                // if(val == Infinity){
-                //     return true;
-                // }
+                if (val == Infinity) {
+                    return true;
+                }
             });
 
             ret = countEmptyCell > 0 ? val : 0;
@@ -124,24 +137,24 @@ TTTGameLogic.prototype = {
 
         // Check if every cell in row x has the value of checkingState
         if (this.cells[x].every((value, index, array) => value === checkingState)) {
-            return true;
+            return { type: ROW_FULL, value: x };
         }
 
         // Check if every cell in column y has the value of checking checkingState
         if (this.cells.every((value, index, array) => value[y] === checkingState)) {
-            return true;
+            return { type: COLUMN_FULL, value: y };
         }
 
         if (x + y == SIZE - 1) {
 
             // Check for diagonal from left top to right bottom
             if (this.cells.every((value, index, array) => this.cells[index][index] === checkingState)) {
-                return true;
+                return { type: TOPLEFT_FULL };
             }
 
             // Check for diagonal from left bottom to right top
             if (this.cells.every((value, index, array) => this.cells[index][SIZE - 1 - index] === checkingState)) {
-                return true;
+                return { type: BOTTOMLEFT_FULL };
             }
         }
 
@@ -152,14 +165,22 @@ TTTGameLogic.prototype = {
         this.cells[x][y] = state;
     },
 
+    getAt: function (x, y) {
+        return this.cells[x][y];
+    },
+
+    hasEmptyCell: function () {
+        return this.loopEmptyCells((x, y) => { return true; }) > 0;
+    },
+
     loopEmptyCells: function (callback) {
         var count = 0;
         for (let i = 0; i < SIZE; i++) {
             for (let j = 0; j < SIZE; j++) {
                 if (this.cells[i][j] === EMPTY_STATE) {
                     count++;
-                    if(callback(i, j)){
-                        return;
+                    if (callback && callback(i, j)) {
+                        return count;
                     }
                 }
             }
@@ -168,15 +189,15 @@ TTTGameLogic.prototype = {
         return count;
     },
 
-    log: function(){
-        for(let i = 0; i< SIZE; i++){
+    log: function () {
+        for (let i = 0; i < SIZE; i++) {
             var str = "";
-            for(let j =0; j< SIZE; j++){
+            for (let j = 0; j < SIZE; j++) {
                 var temp = this.cells[i][j];
-                if(!temp){
+                if (!temp) {
                     temp = '@';
                 }
-                str +=  temp + ' ';
+                str += temp + ' ';
             }
             console.log(str);
         }
