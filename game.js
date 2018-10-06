@@ -1,50 +1,74 @@
 "use strict";
+function TTTGame(boardContainer, optionsContainer, resultsContainer) {
 
-function TTTGame() {
-    var board;
+    var isComputerFirst;
+    var computerState;
+    var userState;
+    var deep;
 
-    var displayState = {};
-    displayState[X_STATE] = 'X';
-    displayState[O_STATE] = 'O';
+    var isComputerTurn;
 
-    this.createView = function (container) {
-        board = document.createElement('div');
-        board.classList.add('ttt-board');
-        for (let i = 0; i < SIZE; i++) {
-            for (let j = 0; j < SIZE; j++) {
-                let cell = document.createElement('div');
-                cell.setAttribute('data-x', i);
-                cell.setAttribute('data-y', j);
-                cell.addEventListener('click', (e) => {
-                    this.hitHandler(i, j);
-                });
-                board.appendChild(cell);
-            }
+    var gameOptions = new TTTGameOptions(optionsContainer, (stater, userSymbol, level) => {
+        isComputerFirst = (stater == COMPUTER_STATER);
+
+        if (userSymbol == X_SYMBOL) {
+            userState = X_STATE;
+            computerState = O_STATE;
+        } else {
+            userState = O_STATE;
+            computerState = X_STATE;
         }
 
-        container.appendChild(board);
-    },
+        if (level == NORMAL_LEVEL) {
+            deep = NORMAL_DEEP;
+        } else {
+            deep = HARD_DEEP;
+        }
+    });
 
-    this.putAt = function (x, y, state) {
-        var cell = board.querySelectorAll(`div[data-x='${x}'][data-y='${y}']`)[0];
-        cell.innerHTML = displayState[state];
-        TTTGame.prototype.putAt.call(this, x, y, state);
-    },
+    var gameResults = new TTTGameResults(resultsContainer);
 
-    this.showWinEffect = function() {
-        
+    var gameView = new TTTGameView(boardContainer, (x, y) => {
+        if (isComputerTurn) {
+            return;
+        }
+
+        putAt(x, y, userState);
+        isComputerTurn = true;
+
+        computerPlay();
+    });
+
+
+    this.initGame = function () {
+        gameOptions.create();
+        gameResults.create();
+        gameView.create();
+        gameLogic = new TTTGameLogic(deep);
     }
 
-    this.hitHandler = function(x, y) {
-        this.putAt(x, y, O_STATE);
+    this.newGame = function () {
+        gameView.clear();
+        gameLogic.clear();
 
-        var cell = this.getBestCellFor(X_STATE);
-        if(cell){
-            this.putAt(cell.x, cell.y, X_STATE);
+        if (isComputerFirst) {
+            computerPlay();
+        } else {
+            isComputerTurn = false;
         }
     }
 
-    
+    function computerPlay() {
+        var cell = gameLogic.getBestCellFor(computerState);
+        if (cell) {
+            putAt(cell.x, cell.y, computerState);
+        }
+
+        isComputerTurn = false;
+    }
+
+    function putAt(x, y, state) {
+        gameView.putAt(x, y, state);
+        gameLogic.putAt(x, y, state);
+    }
 }
-
-TTTGame.prototype = new TTTGameLogic();

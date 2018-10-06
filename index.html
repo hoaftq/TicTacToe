@@ -1,40 +1,25 @@
 <html>
 
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="game.css">
     <script src="game.logic.js"></script>
     <script src="game.js"></script>
-
-    <style>
-        .ttt-board {
-            display: grid;
-            grid-template-columns: auto auto auto;
-            grid-gap: 1vw;
-            justify-content: center;
-            align-content: center;
-            background-color: lightgray;
-            user-select: none;
-            font-family:sans-serif;
-        }
-
-        .ttt-board div {
-            background-color: lightskyblue;
-            font-size: 10vw;
-            width: 15vw;
-            height: 15vw;
-            display: grid;
-            justify-content: center;
-            align-content: center;
-            cursor:pointer;
-        }
-    </style>
-
 </head>
 
 <body>
+    <div style="float: left; width: 26vw;" id="settings">
+    </div>
+    <div style="float: left;" id="board"></div>
+    <div style="float: left; margin-left: 1vw;" id="results"></div>
+
     <script>
         var game = new TTTGame();
-        game.createView(document.body);
-
+        var board = document.getElementById('board');
+        var settings = document.getElementById('settings');
+        var results = document.getElementById('results');
+        game.createView(board, settings, results);
+        game.newGame();
     </script>
 </body>
 
