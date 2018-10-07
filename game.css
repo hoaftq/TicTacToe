@@ -20,7 +20,47 @@
     cursor: pointer;
 }
 
-.ttt-settings-option{
+@keyframes ttt-won-effect {
+    from {
+            background-color: lightskyblue;
+            color: black;
+        }
+    to {
+            background-color: lightsalmon;
+            color: red;
+        }
+}
+
+.ttt-won-line {
+    animation-name: ttt-won-effect;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+.ttt-ending-nofify{
+    font-size: 4vw;
+    padding: 5vw 0;
+    width: 30vw;
+    margin-left: auto;
+    margin-right: auto;
+    background-color:rgba(128, 128, 128, 0.6);
+    color: white;
+    text-align: center;
+    transform: translate(0, -32vw);
+    user-select: none;
+    cursor: pointer;
+}
+/*---------------------Settings------------------------*/
+.ttt-settings-option {
+    user-select: none;
+    margin-top: 10px;
+}
+
+.ttt-settings-label{
+    font-size: 1.5vw;
+}
+
+.ttt-settings-value {
     font-size: 2vw;
     background-color: lightgray;
     width: 10vw;
@@ -29,32 +69,39 @@
     text-align: center;
     display: inline-block;
     cursor: pointer;
-    user-select: none;
 }
 
-.ttt-settings-option:hover{
-    background-color: cadetblue;
-}
-
-
-.ttt-settings-label{
-    margin-top: 10px;
-}
-
-.ttt-settings-option[data-selected]{
+.ttt-settings-value[data-selected] {
     background-color: darkcyan;
 }
 
-.ttt-settings-apply{
-    background: lightgray;
+.ttt-settings-value:hover {
+    background-color: cadetblue;
+}
+
+.ttt-settings-apply {
+    background-color:lightblue;
     width: 10vw;
     padding: 0.5vw;
     font-size: 2vw;
     text-align: center;
+    margin-top: 10px;
     margin-left: auto;
     margin-right: auto;
+    cursor: pointer;
 }
-.ttt-result-label, .ttt-result-value{
+
+.ttt-settings-apply:hover {
+    background-color: cadetblue;
+}
+
+/*---------------------Results------------------------*/
+.ttt-result-title {
+    font-size: 1.5vw;
+    margin-top: 10px;
+}
+
+.ttt-result-label, .ttt-result-value {
     font-size: 2vw;
     display: inline-block;
     width: 5vw;
@@ -62,15 +109,15 @@
     margin: 5px;
 }
 
-.ttt-result-label{
+.ttt-result-label {
     background-color: lightgray;
 }
 
-.ttt-result-value{
+.ttt-result-value {
     text-align: center;
     background-color: darkcyan;
 }
 
-.ttt-result{
+.ttt-result {
     margin-bottom: 10px;
 }

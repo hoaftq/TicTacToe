@@ -3,23 +3,39 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="game.css">
+    <script src="game.options.js"></script>
+    <script src="game.results.js"></script>
+    <script src="game.view.js"></script>
     <script src="game.logic.js"></script>
     <script src="game.js"></script>
+    <style>
+        #settings {
+            float: left;
+            width: 26vw;
+        }
+
+        #board {
+            float: left;
+        }
+
+        #results {
+            float: left;
+            margin-left: 1vw;
+        }
+    </style>
 </head>
 
 <body>
-    <div style="float: left; width: 26vw;" id="settings">
-    </div>
-    <div style="float: left;" id="board"></div>
-    <div style="float: left; margin-left: 1vw;" id="results"></div>
+    <div id="settings"></div>
+    <div id="board"></div>
+    <div id="results"></div>
 
     <script>
-        var game = new TTTGame();
         var board = document.getElementById('board');
         var settings = document.getElementById('settings');
         var results = document.getElementById('results');
-        game.createView(board, settings, results);
-        game.newGame();
+        var game = new TTTGame(board, settings, results);
+        game.initGame();
     </script>
 </body>
 

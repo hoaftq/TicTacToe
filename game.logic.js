@@ -1,5 +1,7 @@
-"use strict";
+// TicTacToe - Pure JavaScript 
+// Write by Trac Quang Hoa, 2018
 
+"use strict";
 const EMPTY_STATE = '';
 const X_STATE = 'x';
 const O_STATE = 'O';
@@ -7,10 +9,10 @@ const O_STATE = 'O';
 const NORMAL_DEEP = 2;
 const HARD_DEEP = 3;
 
-// const HORIZONTAL = 1;
-// const VERTICAL = 2;
-// const TOPLEFT_BOTTOMRIGHT = 3;
-// const BOTTOMLEFT_TOPRIGHT = 4;
+const ROW_FULL = '-';
+const COLUMN_FULL = '|';
+const TOPLEFT_FULL = '\\';
+const BOTTOMLEFT_FULL = '/';
 
 const SIZE = 3;
 
@@ -135,24 +137,24 @@ TTTGameLogic.prototype = {
 
         // Check if every cell in row x has the value of checkingState
         if (this.cells[x].every((value, index, array) => value === checkingState)) {
-            return true;
+            return { type: ROW_FULL, value: x };
         }
 
         // Check if every cell in column y has the value of checking checkingState
         if (this.cells.every((value, index, array) => value[y] === checkingState)) {
-            return true;
+            return { type: COLUMN_FULL, value: y };
         }
 
         if (x + y == SIZE - 1) {
 
             // Check for diagonal from left top to right bottom
             if (this.cells.every((value, index, array) => this.cells[index][index] === checkingState)) {
-                return true;
+                return { type: TOPLEFT_FULL };
             }
 
             // Check for diagonal from left bottom to right top
             if (this.cells.every((value, index, array) => this.cells[index][SIZE - 1 - index] === checkingState)) {
-                return true;
+                return { type: BOTTOMLEFT_FULL };
             }
         }
 
@@ -163,13 +165,21 @@ TTTGameLogic.prototype = {
         this.cells[x][y] = state;
     },
 
+    getAt: function (x, y) {
+        return this.cells[x][y];
+    },
+
+    hasEmptyCell: function () {
+        return this.loopEmptyCells((x, y) => { return true; }) > 0;
+    },
+
     loopEmptyCells: function (callback) {
         var count = 0;
         for (let i = 0; i < SIZE; i++) {
             for (let j = 0; j < SIZE; j++) {
                 if (this.cells[i][j] === EMPTY_STATE) {
                     count++;
-                    if (callback(i, j)) {
+                    if (callback && callback(i, j)) {
                         return count;
                     }
                 }

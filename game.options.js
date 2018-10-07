@@ -1,3 +1,6 @@
+// TicTacToe - Pure JavaScript 
+// Write by Trac Quang Hoa, 2018
+
 "use strict";
 const USER_STATER = 0;
 const COMPUTER_STATER = 1;
@@ -14,50 +17,62 @@ function TTTGameOptions(container, changeHandler) {
         level = NORMAL_LEVEL;
 
     this.create = function () {
+        let starterOption = {};
+        starterOption[USER_STATER] = 'You';
+        starterOption[COMPUTER_STATER] = 'Computer';
         container.appendChild(
             createOption(
                 'Play first:',
                 'starter',
-                { USER_STATER: 'You', COMPUTER_STATER: 'Computer' },
+                starterOption,
                 starter,
                 (value) => { starter = value; }));
 
+        let symbolOption = {};
+        symbolOption[X_SYMBOL] = 'X';
+        symbolOption[O_SYMBOL] = 'O';
         container.appendChild(createOption(
             'Your symbol:',
             'symbol',
-            { X_SYMBOL: 'X', O_SYMBOL: 'O' },
+            symbolOption,
             userSymbol,
             (value) => { userSymbol = value; }));
 
+        let levelOption = {};
+        levelOption[NORMAL_LEVEL] = 'Normal';
+        levelOption[HARD_LEVEL] = 'Hard';
         container.appendChild(createOption(
             'Level:',
             'level',
-            { NORMAL_LEVEL: 'Normal', HARD_LEVEL: 'Hard' },
+            levelOption,
             level,
             (value) => { level = value; }));
 
         container.appendChild(createButton('Apply'));
+
+        changeHandler(starter, userSymbol, level);
     }
 
     function createOption(label, name, options, selectedValue, optionChangedHandler) {
-        var wraper = document.createElement('div');
+        var option = document.createElement('div');
+        option.classList.add('ttt-settings-option');
 
         var optionLabel = document.createElement('div');
         optionLabel.classList.add('ttt-settings-label');
         optionLabel.appendChild(document.createTextNode(label));
-        wraper.appendChild(optionLabel);
+        option.appendChild(optionLabel);
 
         for (let value in options) {
-            let option = document.createElement('div');
-            option.classList.add('ttt-settings-option');
-            option.setAttribute('name', name);
-            option.setAttribute('data-value', value);
+            let optionValue = document.createElement('div');
+            optionValue.classList.add('ttt-settings-value');
+            optionValue.setAttribute('name', name);
+            optionValue.setAttribute('data-value', value);
             if (value == selectedValue) {
-                option.setAttribute('data-selected', true);
+                optionValue.setAttribute('data-selected', true);
             }
-            option.appendChild(document.createTextNode(options[value]));
-            option.addEventListener('click', function (e) {
-                var options = wraper.getElementsByClassName('ttt-settings-option');
+            optionValue.appendChild(document.createTextNode(options[value]));
+            optionValue.addEventListener('click', function (e) {
+                var options = option.getElementsByClassName('ttt-settings-value');
                 for (let i = 0; i < options.length; i++) {
                     options.item(i).removeAttribute('data-selected');
                 }
@@ -66,10 +81,10 @@ function TTTGameOptions(container, changeHandler) {
                 optionChangedHandler(value);
             });
 
-            wraper.appendChild(option);
+            option.appendChild(optionValue);
         }
 
-        return wraper;
+        return option;
     }
 
     function createButton(text) {

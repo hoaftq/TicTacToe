@@ -1,3 +1,6 @@
+// TicTacToe - Pure JavaScript 
+// Write by Trac Quang Hoa, 2018
+
 "use strict";
 function TTTGameResults(container) {
     var wonElement,
@@ -8,14 +11,11 @@ function TTTGameResults(container) {
         lost = 0;
 
     this.create = function () {
-        var resultTitle = document.createElement('div');
-        resultTitle.classList.add('ttt-result-title');
-        resultTitle.appendChild(document.createTextNode('Results:'));
-        container.appendChild(resultTitle);
+        createResultTile('Results:');
 
-        container.appendChild(wonElement = createResult('Won', won));
-        container.appendChild(drawElement = createResult('Draw', draw));
-        container.appendChild(lostElement = createResult('Lost', lost));
+        wonElement = createResult('Won', won);
+        drawElement = createResult('Draw', draw);
+        lostElement = createResult('Lost', lost);
     }
 
     this.incWon = function () {
@@ -30,6 +30,14 @@ function TTTGameResults(container) {
         lostElement.innerHTML = ++lost;
     }
 
+    function createResultTile(title) {
+        var resultTitle = document.createElement('div');
+        resultTitle.classList.add('ttt-result-title');
+        resultTitle.appendChild(document.createTextNode(title));
+        container.appendChild(resultTitle);
+        return resultTitle;
+    }
+
     function createResult(label, value) {
         var resultElem = document.createElement('div');
         resultElem.classList.add('ttt-result');
@@ -41,9 +49,10 @@ function TTTGameResults(container) {
 
         var resultValue = document.createElement('div');
         resultValue.classList.add('ttt-result-value');
-        resultElem.appendChild(document.createTextNode(value));
+        resultValue.appendChild(document.createTextNode(value));
         resultElem.appendChild(resultValue);
 
-        return resultElem;
+        container.appendChild(resultElem);
+        return resultValue;
     }
 }
