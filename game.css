@@ -1,23 +1,57 @@
+
+/*---------------------Results------------------------*/
+.ttt-result-label, .ttt-result-value {
+    display: inline-block;
+    padding: 0.3em;
+    margin: 3px;
+}
+
+.ttt-result-label {
+    width: 2em;
+    background-color: transparent;
+    color: darkblue;
+}
+
+.ttt-result-value {
+    width: 3.2em;
+    text-align: center;
+    background-color: steelblue;
+    color: white;
+    font-weight: bold;
+}
+
+.ttt-result {
+    margin-bottom: 10px;
+    float: left;
+}
+
+/*---------------------Game board------------------------*/
+#board {
+    clear: both;
+    position: relative;
+}
+
 .ttt-board {
     display: grid;
     grid-template-columns: auto auto auto;
-    grid-gap: 1vw;
+    grid-gap: 0.5vw;
     justify-content: center;
     align-content: center;
-    background-color: lightgray;
+    background-color: lightyellow;
     user-select: none;
     font-family: sans-serif;
 }
 
 .ttt-board div {
     background-color: lightskyblue;
-    font-size: 10vw;
-    width: 15vw;
-    height: 15vw;
+    font-size: 14vw;
+    width: 22vw;
+    height: 22vw;
     display: grid;
     justify-content: center;
     align-content: center;
     cursor: pointer;
+    border-radius: 5px;
 }
 
 @keyframes ttt-won-effect {
@@ -26,53 +60,57 @@
             color: black;
         }
     to {
-            background-color: lightsalmon;
+            background-color: pink;
             color: red;
         }
 }
 
 .ttt-won-line {
     animation-name: ttt-won-effect;
-    animation-duration: 1s;
+    animation-duration: 1.5s;
     animation-fill-mode: forwards;
 }
 
 .ttt-ending-nofify{
-    font-size: 4vw;
-    padding: 5vw 0;
-    width: 30vw;
-    margin-left: auto;
-    margin-right: auto;
-    background-color:rgba(128, 128, 128, 0.6);
-    color: white;
-    text-align: center;
-    transform: translate(0, -32vw);
-    user-select: none;
+    font-size: 8vw;
+    position: absolute;
     cursor: pointer;
+    width: 36vw;
+    left: 29vw;
+    height: 10vw;
+    line-height: 10vw;
+    top: 26vw;
+    padding: 2vw 0;
+    background-color:rgba(255, 255, 255, 0.8);
+    color: darkblue;
+    text-align: center;
+    user-select: none;
+    border-radius: 5px;
 }
+
 /*---------------------Settings------------------------*/
 .ttt-settings-option {
+    margin-top: 1em;
+    float: left;
     user-select: none;
-    margin-top: 10px;
 }
 
 .ttt-settings-label{
-    font-size: 1.5vw;
+    color: darkblue;
 }
 
 .ttt-settings-value {
-    font-size: 2vw;
-    background-color: lightgray;
-    width: 10vw;
-    margin: 5px;
-    padding: 0.5vw;
-    text-align: center;
     display: inline-block;
+    width: 4.7em;
+    padding: 0.5em 0;
+    margin: 0.3em;
+    background-color: lightgray;
+    text-align: center;
     cursor: pointer;
 }
 
 .ttt-settings-value[data-selected] {
-    background-color: darkcyan;
+    background-color: lightblue;
 }
 
 .ttt-settings-value:hover {
@@ -80,44 +118,45 @@
 }
 
 .ttt-settings-apply {
-    background-color:lightblue;
-    width: 10vw;
-    padding: 0.5vw;
-    font-size: 2vw;
+    width: 4em;
+    padding: 0.5em 2em;
+    margin-top: 2.5em;
+    margin-left: 0.3em;
+    float: left;
+    background-color: darkseagreen;
     text-align: center;
-    margin-top: 10px;
-    margin-left: auto;
-    margin-right: auto;
     cursor: pointer;
 }
 
 .ttt-settings-apply:hover {
-    background-color: cadetblue;
+    background-color: lightgreen;
 }
 
-/*---------------------Results------------------------*/
-.ttt-result-title {
-    font-size: 1.5vw;
-    margin-top: 10px;
+@media (min-width: 768px) { 
+
+    .ttt-board {
+        grid-gap: 10px;
+    }
+
+    .ttt-board div {
+        font-size: 90px;
+        width: 160px;
+        height: 160px;
+    }
+
+    .ttt-ending-nofify {
+        font-size: 50px;
+        height: 60px;
+        line-height: 60px;
+        top: 190px;        
+        width: 250px;
+        left: calc(50% - 125px);
+    }
 }
 
-.ttt-result-label, .ttt-result-value {
-    font-size: 2vw;
-    display: inline-block;
-    width: 5vw;
-    padding: 0.5vw;
-    margin: 5px;
-}
-
-.ttt-result-label {
-    background-color: lightgray;
-}
-
-.ttt-result-value {
-    text-align: center;
-    background-color: darkcyan;
-}
-
-.ttt-result {
-    margin-bottom: 10px;
+#about {
+    clear: both; 
+    float: right; 
+    color: gray;
+    font-size: small;
 }

@@ -1,5 +1,5 @@
+<!DOCTYPE html>
 <html>
-
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="game.css">
@@ -8,33 +8,20 @@
     <script src="game.view.js"></script>
     <script src="game.logic.js"></script>
     <script src="game.js"></script>
-    <style>
-        #settings {
-            float: left;
-            width: 26vw;
-        }
-
-        #board {
-            float: left;
-        }
-
-        #results {
-            float: left;
-            margin-left: 1vw;
-        }
-    </style>
 </head>
 
 <body>
-    <div id="settings"></div>
-    <div id="board"></div>
     <div id="results"></div>
-
+    <div id="board"></div>
+    <div id="settings"></div>
+    <div id="about">
+        TicTacToe, write by <a href="https://github.com/hoaftq" target="_blank">hoaftq</a>
+    </div>
     <script>
         var board = document.getElementById('board');
         var settings = document.getElementById('settings');
         var results = document.getElementById('results');
-        var game = new TTTGame(board, settings, results);
+        var game = new TttGame(board, settings, results);
         game.initGame();
     </script>
 </body>

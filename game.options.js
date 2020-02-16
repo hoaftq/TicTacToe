@@ -11,40 +11,40 @@ const O_SYMBOL = 1;
 const NORMAL_LEVEL = 0;
 const HARD_LEVEL = 1;
 
-function TTTGameOptions(container, changeHandler) {
-    var starter = COMPUTER_STATER,
+function TttGameOptions(container, changeHandler) {
+    let starter = COMPUTER_STATER,
         userSymbol = O_SYMBOL,
         level = NORMAL_LEVEL;
 
     this.create = function () {
-        let starterOption = {};
-        starterOption[USER_STATER] = 'You';
-        starterOption[COMPUTER_STATER] = 'Computer';
+        let starterOptions = {};
+        starterOptions[USER_STATER] = 'You';
+        starterOptions[COMPUTER_STATER] = 'Computer';
         container.appendChild(
             createOption(
                 'Play first:',
                 'starter',
-                starterOption,
+                starterOptions,
                 starter,
                 (value) => { starter = value; }));
 
-        let symbolOption = {};
-        symbolOption[X_SYMBOL] = 'X';
-        symbolOption[O_SYMBOL] = 'O';
+        let symbolOptions = {};
+        symbolOptions[X_SYMBOL] = 'X';
+        symbolOptions[O_SYMBOL] = 'O';
         container.appendChild(createOption(
             'Your symbol:',
             'symbol',
-            symbolOption,
+            symbolOptions,
             userSymbol,
             (value) => { userSymbol = value; }));
 
-        let levelOption = {};
-        levelOption[NORMAL_LEVEL] = 'Normal';
-        levelOption[HARD_LEVEL] = 'Hard';
+        let levelOptions = {};
+        levelOptions[NORMAL_LEVEL] = 'Normal';
+        levelOptions[HARD_LEVEL] = 'Hard';
         container.appendChild(createOption(
             'Level:',
             'level',
-            levelOption,
+            levelOptions,
             level,
             (value) => { level = value; }));
 
@@ -54,10 +54,10 @@ function TTTGameOptions(container, changeHandler) {
     }
 
     function createOption(label, name, options, selectedValue, optionChangedHandler) {
-        var option = document.createElement('div');
+        let option = document.createElement('div');
         option.classList.add('ttt-settings-option');
 
-        var optionLabel = document.createElement('div');
+        let optionLabel = document.createElement('div');
         optionLabel.classList.add('ttt-settings-label');
         optionLabel.appendChild(document.createTextNode(label));
         option.appendChild(optionLabel);
