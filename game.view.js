@@ -2,17 +2,17 @@
 // Write by Trac Quang Hoa, 2018
 
 "use strict";
-function TTTGameView(container, userPlayHandler, newGameHandler) {
+function TttGameView(container, userPlayHandler, newGameHandler) {
 
     const WinEffectClass = 'ttt-won-line';
 
-    var displayState = {};
-    displayState[X_STATE] = 'X';
-    displayState[O_STATE] = 'O';
-    displayState[EMPTY_STATE] = '';
+    let displayStates = {};
+    displayStates[X_STATE] = 'X';
+    displayStates[O_STATE] = 'O';
+    displayStates[EMPTY_STATE] = '';
 
-    var board;
-    var endingDlg;
+    let board;
+    let endingDlg;
 
     this.create = function () {
         board = document.createElement('div');
@@ -47,7 +47,7 @@ function TTTGameView(container, userPlayHandler, newGameHandler) {
         var cells = board.childNodes;
         for (let i = 0; i < cells.length; i++) {
             var item = cells.item(i);
-            item.innerHTML = displayState[EMPTY_STATE];
+            item.innerHTML = displayStates[EMPTY_STATE];
             item.classList.remove(WinEffectClass);
         }
 
@@ -56,7 +56,7 @@ function TTTGameView(container, userPlayHandler, newGameHandler) {
 
     this.putAt = function (x, y, state) {
         var cell = board.querySelector(`div[data-x='${x}'][data-y='${y}']`);
-        cell.innerHTML = displayState[state];
+        cell.innerHTML = displayStates[state];
     }
 
     this.showWonEffect = function (line) {
@@ -89,7 +89,7 @@ function TTTGameView(container, userPlayHandler, newGameHandler) {
         }
     }
 
-    this.showEndingNotify = function (message) {
+    this.showEndedNotify = function (message) {
         endingDlg.innerHTML = message;
         endingDlg.style.display = 'block';
     }

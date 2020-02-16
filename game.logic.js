@@ -7,7 +7,7 @@ const X_STATE = 'x';
 const O_STATE = 'O';
 
 const NORMAL_DEEP = 2;
-const HARD_DEEP = 3;
+const HARD_DEEP = 4;
 
 const ROW_FULL = '-';
 const COLUMN_FULL = '|';
@@ -16,61 +16,50 @@ const BOTTOMLEFT_FULL = '/';
 
 const SIZE = 3;
 
-function TTTGameLogic(deep) {
-    this.cells = [
-        [EMPTY_STATE, EMPTY_STATE, EMPTY_STATE],
-        [EMPTY_STATE, EMPTY_STATE, EMPTY_STATE],
-        [EMPTY_STATE, EMPTY_STATE, EMPTY_STATE]
-    ];
-
+function TttGameLogic(deep) {
     this.deep = deep ? deep : NORMAL_DEEP;
+    this.createBoard();
 }
 
-TTTGameLogic.prototype = {
+TttGameLogic.prototype = {
 
-    clear: function () {
-        for (let i = 0; i < SIZE; i++) {
-            for (let j = 0; j < SIZE; j++) {
-                this.cells[i][j] = EMPTY_STATE;
-            }
-        }
+    createBoard: function () {
+        this.cells = [
+            [EMPTY_STATE, EMPTY_STATE, EMPTY_STATE],
+            [EMPTY_STATE, EMPTY_STATE, EMPTY_STATE],
+            [EMPTY_STATE, EMPTY_STATE, EMPTY_STATE]
+        ];
     },
 
     getBestCellFor: function (state) {
-        var cell;
-        var max = -Infinity;
-        var min = Infinity;
-
+        let candidateCells = [];
         if (state == X_STATE) {
+            let max = -Infinity;
             this.loopEmptyCells((x, y) => {
-                console.log('evaluate ' + x + ',' + y);
                 let val = this.evalX(x, y, 0);
-                if (max <= val) {
+                if (val == max) {
+                    candidateCells.push({ x, y });
+                } else if (val > max) {
                     max = val;
-                    cell = { x, y };
-
-                    // Finish the loop
-                    if (max === Infinity) {
-                        return true;
-                    }
+                    candidateCells = [{ x, y }];
                 }
             });
         } else {
+            let min = Infinity;
             this.loopEmptyCells((x, y) => {
                 let val = this.evalO(x, y, 0);
-                if (min >= val) {
+                if (val == min) {
+                    candidateCells.push({ x, y });
+                } else if (val < min) {
                     min = val;
-                    cell = { x, y };
-
-                    // Finish the loop
-                    if (min === -Infinity) {
-                        return true;
-                    }
+                    candidateCells = [{ x, y }];
                 }
             });
         }
 
-        return cell;
+        // Choose a random cell in all candidate cells
+        let r = Math.floor(Math.random() * candidateCells.length);
+        return candidateCells[r];
     },
 
     evalX: function (x, y, level) {
@@ -78,10 +67,8 @@ TTTGameLogic.prototype = {
             return 0;
         }
 
-        var ret;
+        let ret;
         this.cells[x][y] = X_STATE;
-        console.log(x + ',' + y + ',' + X_STATE);
-        this.log();
 
         if (this.hasWon(x, y, X_STATE)) {
             ret = Infinity;
@@ -89,6 +76,8 @@ TTTGameLogic.prototype = {
             let val = Infinity;
             let countEmptyCell = this.loopEmptyCells((i, j) => {
                 val = Math.min(val, this.evalO(i, j, level + 1));
+
+                // Finish the loop by returning true
                 if (val == -Infinity) {
                     return true;
                 }
@@ -99,7 +88,6 @@ TTTGameLogic.prototype = {
 
         // Restore the original state
         this.cells[x][y] = EMPTY_STATE;
-        console.log('ret x =' + ret);
         return ret;
     },
 
@@ -108,17 +96,17 @@ TTTGameLogic.prototype = {
             return 0;
         }
 
-        var ret;
+        let ret;
         this.cells[x][y] = O_STATE;
-        console.log(x + ',' + y + ',' + O_STATE);
-        this.log();
 
         if (this.hasWon(x, y, O_STATE)) {
             ret = -Infinity;
         } else {
             let val = -Infinity;
-            var countEmptyCell = this.loopEmptyCells((i, j) => {
+            let countEmptyCell = this.loopEmptyCells((i, j) => {
                 val = Math.max(val, this.evalX(i, j, level + 1));
+
+                // Finish the loop by returning true
                 if (val == Infinity) {
                     return true;
                 }
@@ -129,9 +117,9 @@ TTTGameLogic.prototype = {
 
         // Restore the original state
         this.cells[x][y] = EMPTY_STATE;
-        console.log('ret o =' + ret);
         return ret;
     },
+
 
     hasWon: function (x, y, checkingState) {
 
@@ -145,14 +133,16 @@ TTTGameLogic.prototype = {
             return { type: COLUMN_FULL, value: y };
         }
 
-        if (x + y == SIZE - 1) {
 
-            // Check for diagonal from left top to right bottom
+        // Check for diagonal from left top to right bottom
+        if (x === y) {
             if (this.cells.every((value, index, array) => this.cells[index][index] === checkingState)) {
                 return { type: TOPLEFT_FULL };
             }
+        }
 
-            // Check for diagonal from left bottom to right top
+        // Check for diagonal from left bottom to right top
+        if (x + y === SIZE - 1) {
             if (this.cells.every((value, index, array) => this.cells[index][SIZE - 1 - index] === checkingState)) {
                 return { type: BOTTOMLEFT_FULL };
             }

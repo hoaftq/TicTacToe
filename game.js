@@ -2,17 +2,17 @@
 // Write by Trac Quang Hoa, 2018
 
 "use strict";
-function TTTGame(boardContainer, optionsContainer, resultsContainer) {
+function TttGame(boardContainer, optionsContainer, resultsContainer) {
 
-    var isComputerFirst;
-    var computerState;
-    var userState;
-    var deep;
+    let isComputerFirst;
+    let computerState;
+    let userState;
+    let deep;
 
-    var isComputerTurn;
-    var isPlaying;
+    let isComputerTurn;
+    let isPlaying;
 
-    var gameOptions = new TTTGameOptions(optionsContainer, (stater, userSymbol, level) => {
+    let gameOptions = new TttGameOptions(optionsContainer, (stater, userSymbol, level) => {
         isComputerFirst = (stater == COMPUTER_STATER);
 
         if (userSymbol == X_SYMBOL) {
@@ -32,9 +32,9 @@ function TTTGame(boardContainer, optionsContainer, resultsContainer) {
         this.newGame();
     });
 
-    var gameResults = new TTTGameResults(resultsContainer);
+    let gameResults = new TttGameResults(resultsContainer);
 
-    var gameView = new TTTGameView(boardContainer,
+    let gameView = new TttGameView(boardContainer,
         (e, x, y) => {
             if (!isPlaying || isComputerTurn) {
                 return;
@@ -63,7 +63,7 @@ function TTTGame(boardContainer, optionsContainer, resultsContainer) {
         }
     );
 
-    var gameLogic = new TTTGameLogic(deep);
+    let gameLogic = new TttGameLogic(deep);
 
     this.initGame = function () {
         gameResults.create();
@@ -74,7 +74,7 @@ function TTTGame(boardContainer, optionsContainer, resultsContainer) {
     this.newGame = function () {
         isPlaying = true;
         gameView.clear();
-        gameLogic.clear();
+        gameLogic.createBoard();
 
         if (isComputerFirst) {
             computerPlay();
@@ -84,7 +84,7 @@ function TTTGame(boardContainer, optionsContainer, resultsContainer) {
     }
 
     function computerPlay() {
-        var cell = gameLogic.getBestCellFor(computerState);
+        let cell = gameLogic.getBestCellFor(computerState);
         if (cell) {
             playAt(cell.x, cell.y, computerState);
         }
@@ -95,7 +95,7 @@ function TTTGame(boardContainer, optionsContainer, resultsContainer) {
     function playAt(x, y, state) {
         gameView.putAt(x, y, state);
         gameLogic.putAt(x, y, state);
-        var gameState = gameLogic.hasWon(x, y, state);
+        let gameState = gameLogic.hasWon(x, y, state);
 
         // User or computer has won
         if (gameState) {
@@ -103,18 +103,17 @@ function TTTGame(boardContainer, optionsContainer, resultsContainer) {
             gameView.showWonEffect(gameState);
             if (state == userState) {
                 gameResults.incWon();
-                gameView.showEndingNotify('You won!');
+                gameView.showEndedNotify('You won!');
             } else {
                 gameResults.incLost();
-                gameView.showEndingNotify('You lost!');
+                gameView.showEndedNotify('You lost!');
             }
         }
         // No one won and there is no empty cell left, the game is draw
         else if (!gameLogic.hasEmptyCell()) {
             isPlaying = false;
             gameResults.incDraw();
-            gameView.showEndingNotify('Draw!');
-
+            gameView.showEndedNotify('Draw!');
         }
     }
 }
