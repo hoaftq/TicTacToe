@@ -1,7 +1,7 @@
 // TicTacToe - Pure JavaScript 
 // Write by Trac Quang Hoa, 2018
 
-"use strict";
+'use strict';
 function TttGameView(container, userPlayHandler, newGameHandler) {
 
     const WinEffectClass = 'ttt-won-line';

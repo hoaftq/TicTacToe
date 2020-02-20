@@ -1,7 +1,7 @@
 // TicTacToe - Pure JavaScript 
 // Write by Trac Quang Hoa, 2018
 
-"use strict";
+'use strict';
 function TttGame(boardContainer, optionsContainer, resultsContainer) {
 
     let isComputerFirst;
@@ -12,10 +12,12 @@ function TttGame(boardContainer, optionsContainer, resultsContainer) {
     let isComputerTurn;
     let isPlaying;
 
-    let gameOptions = new TttGameOptions(optionsContainer, (stater, userSymbol, level) => {
-        isComputerFirst = (stater == COMPUTER_STATER);
+    let gameLogic = new TttGameLogic(deep);
 
-        if (userSymbol == X_SYMBOL) {
+    let gameOptions = new TttGameOptions(optionsContainer, (stater, userSymbol, level) => {
+        isComputerFirst = (stater === COMPUTER_FIRST);
+
+        if (userSymbol === X_SYMBOL) {
             userState = X_STATE;
             computerState = O_STATE;
         } else {
@@ -23,12 +25,13 @@ function TttGame(boardContainer, optionsContainer, resultsContainer) {
             computerState = X_STATE;
         }
 
-        if (level == NORMAL_LEVEL) {
+        if (level === NORMAL_LEVEL) {
             deep = NORMAL_DEEP;
         } else {
             deep = HARD_DEEP;
         }
 
+        gameLogic = new TttGameLogic(deep);
         this.newGame();
     });
 
@@ -63,7 +66,7 @@ function TttGame(boardContainer, optionsContainer, resultsContainer) {
         }
     );
 
-    let gameLogic = new TttGameLogic(deep);
+
 
     this.initGame = function () {
         gameResults.create();
@@ -101,7 +104,7 @@ function TttGame(boardContainer, optionsContainer, resultsContainer) {
         if (gameState) {
             isPlaying = false;
             gameView.showWonEffect(gameState);
-            if (state == userState) {
+            if (state === userState) {
                 gameResults.incWon();
                 gameView.showEndedNotify('You won!');
             } else {

@@ -1,7 +1,7 @@
 // TicTacToe - Pure JavaScript 
 // Write by Trac Quang Hoa, 2018
 
-"use strict";
+'use strict';
 function TttGameResults(container) {
     let wonElement,
         drawElement,
