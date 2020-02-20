@@ -1,20 +1,20 @@
 // TicTacToe - Pure JavaScript 
 // Write by Trac Quang Hoa, 2018
 
-"use strict";
+'use strict';
+const SIZE = 3;
+
 const EMPTY_STATE = '';
 const X_STATE = 'x';
 const O_STATE = 'O';
 
-const NORMAL_DEEP = 2;
-const HARD_DEEP = 4;
+const NORMAL_DEEP = 3;
+const HARD_DEEP = 5;
 
 const ROW_FULL = '-';
 const COLUMN_FULL = '|';
 const TOPLEFT_FULL = '\\';
 const BOTTOMLEFT_FULL = '/';
-
-const SIZE = 3;
 
 function TttGameLogic(deep) {
     this.deep = deep ? deep : NORMAL_DEEP;
@@ -33,11 +33,11 @@ TttGameLogic.prototype = {
 
     getBestCellFor: function (state) {
         let candidateCells = [];
-        if (state == X_STATE) {
+        if (state === X_STATE) {
             let max = -Infinity;
             this.loopEmptyCells((x, y) => {
                 let val = this.evalX(x, y, 0);
-                if (val == max) {
+                if (val === max) {
                     candidateCells.push({ x, y });
                 } else if (val > max) {
                     max = val;
@@ -48,8 +48,8 @@ TttGameLogic.prototype = {
             let min = Infinity;
             this.loopEmptyCells((x, y) => {
                 let val = this.evalO(x, y, 0);
-                if (val == min) {
-                    candidateCells.push({ x, y });
+                if (val === min) {
+                                        candidateCells.push({ x, y });
                 } else if (val < min) {
                     min = val;
                     candidateCells = [{ x, y }];
@@ -78,7 +78,7 @@ TttGameLogic.prototype = {
                 val = Math.min(val, this.evalO(i, j, level + 1));
 
                 // Finish the loop by returning true
-                if (val == -Infinity) {
+                if (val === -Infinity) {
                     return true;
                 }
             });
@@ -86,7 +86,7 @@ TttGameLogic.prototype = {
             ret = countEmptyCell > 0 ? val : 0;
         }
 
-        // Restore the original state
+        // Restore to the original state
         this.cells[x][y] = EMPTY_STATE;
         return ret;
     },
@@ -107,7 +107,7 @@ TttGameLogic.prototype = {
                 val = Math.max(val, this.evalX(i, j, level + 1));
 
                 // Finish the loop by returning true
-                if (val == Infinity) {
+                if (val === Infinity) {
                     return true;
                 }
             });
@@ -115,7 +115,7 @@ TttGameLogic.prototype = {
             ret = countEmptyCell > 0 ? val : 0;
         }
 
-        // Restore the original state
+        // Restore to the original state
         this.cells[x][y] = EMPTY_STATE;
         return ret;
     },

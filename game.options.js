@@ -1,30 +1,30 @@
 // TicTacToe - Pure JavaScript 
 // Write by Trac Quang Hoa, 2018
 
-"use strict";
-const USER_STATER = 0;
-const COMPUTER_STATER = 1;
+'use strict';
+const USER_FIRST = 'UserFirst';
+const COMPUTER_FIRST = 'ComputerFirst';
 
-const X_SYMBOL = 0;
-const O_SYMBOL = 1;
+const X_SYMBOL = 'X';
+const O_SYMBOL = 'O';
 
-const NORMAL_LEVEL = 0;
-const HARD_LEVEL = 1;
+const NORMAL_LEVEL = 'Normal';
+const HARD_LEVEL = 'Hard';
 
 function TttGameOptions(container, changeHandler) {
-    let starter = COMPUTER_STATER,
+    let starter = COMPUTER_FIRST,
         userSymbol = O_SYMBOL,
         level = NORMAL_LEVEL;
 
     this.create = function () {
-        let starterOptions = {};
-        starterOptions[USER_STATER] = 'You';
-        starterOptions[COMPUTER_STATER] = 'Computer';
+        let firstPlayerOptions = {};
+        firstPlayerOptions[USER_FIRST] = 'You';
+        firstPlayerOptions[COMPUTER_FIRST] = 'Computer';
         container.appendChild(
             createOption(
                 'Play first:',
                 'starter',
-                starterOptions,
+                firstPlayerOptions,
                 starter,
                 (value) => { starter = value; }));
 
@@ -67,7 +67,7 @@ function TttGameOptions(container, changeHandler) {
             optionValue.classList.add('ttt-settings-value');
             optionValue.setAttribute('name', name);
             optionValue.setAttribute('data-value', value);
-            if (value == selectedValue) {
+            if (value === selectedValue) {
                 optionValue.setAttribute('data-selected', true);
             }
             optionValue.appendChild(document.createTextNode(options[value]));
