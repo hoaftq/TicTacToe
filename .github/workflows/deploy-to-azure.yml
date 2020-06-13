@@ -13,7 +13,7 @@ jobs:
       with:
         node-version: '10.x'
 
-    - name: 'Run Azure webapp deploy action using publish profile credentials'
+    - name: 'Deploy'
           uses: azure/webapps-deploy@v2
           with: 
             app-name: node-rn
