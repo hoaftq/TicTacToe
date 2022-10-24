@@ -49,7 +49,7 @@ TttGameLogic.prototype = {
             this.loopEmptyCells((x, y) => {
                 let val = this.evalO(x, y, 0);
                 if (val === min) {
-                                        candidateCells.push({ x, y });
+                    candidateCells.push({ x, y });
                 } else if (val < min) {
                     min = val;
                     candidateCells = [{ x, y }];
@@ -194,3 +194,19 @@ TttGameLogic.prototype = {
         console.log('-------');
     }
 }
+
+window.TttGameLogic = TttGameLogic;
+
+window.SIZE = SIZE;
+
+window.X_STATE = X_STATE;
+window.O_STATE = O_STATE;
+window.EMPTY_STATE = EMPTY_STATE;
+
+window.NORMAL_DEEP = NORMAL_DEEP;
+window.HARD_DEEP = HARD_DEEP;
+
+window.ROW_FULL = ROW_FULL;
+window.COLUMN_FULL = COLUMN_FULL;
+window.TOPLEFT_FULL = TOPLEFT_FULL;
+window.BOTTOMLEFT_FULL = BOTTOMLEFT_FULL;

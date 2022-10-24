@@ -94,3 +94,5 @@ function TttGameView(container, userPlayHandler, newGameHandler) {
         endingDlg.style.display = 'block';
     }
 }
+
+window.TttGameView = TttGameView;

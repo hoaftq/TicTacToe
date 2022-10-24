@@ -56,3 +56,5 @@ function TttGameResults(container) {
         return resultValue;
     }
 }
+
+window.TttGameResults = TttGameResults;

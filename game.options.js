@@ -97,3 +97,13 @@ function TttGameOptions(container, changeHandler) {
         return button;
     }
 }
+
+window.TttGameOptions = TttGameOptions;
+
+window.USER_FIRST = USER_FIRST;
+window.COMPUTER_FIRST = COMPUTER_FIRST;
+window.X_SYMBOL = X_SYMBOL;
+window.O_SYMBOL = O_SYMBOL;
+
+window.NORMAL_LEVEL = NORMAL_LEVEL;
+window.HARD_LEVEL = HARD_LEVEL;
