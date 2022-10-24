@@ -1,17 +1,18 @@
-// TicTacToe - Pure JavaScript 
+// TicTacToe - Vanilla JavaScript 
 // Write by Trac Quang Hoa, 2018
 
 'use strict';
-const USER_FIRST = 'UserFirst';
-const COMPUTER_FIRST = 'ComputerFirst';
 
-const X_SYMBOL = 'X';
-const O_SYMBOL = 'O';
+export const USER_FIRST = 'UserFirst';
+export const COMPUTER_FIRST = 'ComputerFirst';
 
-const NORMAL_LEVEL = 'Normal';
-const HARD_LEVEL = 'Hard';
+export const X_SYMBOL = 'X';
+export const O_SYMBOL = 'O';
 
-function TttGameOptions(container, changeHandler) {
+export const NORMAL_LEVEL = 'Normal';
+export const HARD_LEVEL = 'Hard';
+
+export default function TTTGameOptions(container, changeHandler) {
     let starter = COMPUTER_FIRST,
         userSymbol = O_SYMBOL,
         level = NORMAL_LEVEL;
@@ -97,13 +98,3 @@ function TttGameOptions(container, changeHandler) {
         return button;
     }
 }
-
-window.TttGameOptions = TttGameOptions;
-
-window.USER_FIRST = USER_FIRST;
-window.COMPUTER_FIRST = COMPUTER_FIRST;
-window.X_SYMBOL = X_SYMBOL;
-window.O_SYMBOL = O_SYMBOL;
-
-window.NORMAL_LEVEL = NORMAL_LEVEL;
-window.HARD_LEVEL = HARD_LEVEL;

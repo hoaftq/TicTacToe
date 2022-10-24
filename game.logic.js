@@ -1,27 +1,28 @@
-// TicTacToe - Pure JavaScript 
+// TicTacToe - Vanilla JavaScript 
 // Write by Trac Quang Hoa, 2018
 
 'use strict';
-const SIZE = 3;
 
-const EMPTY_STATE = '';
-const X_STATE = 'x';
-const O_STATE = 'O';
+export const SIZE = 3;
 
-const NORMAL_DEEP = 3;
-const HARD_DEEP = 5;
+export const EMPTY_STATE = '';
+export const X_STATE = 'x';
+export const O_STATE = 'O';
 
-const ROW_FULL = '-';
-const COLUMN_FULL = '|';
-const TOPLEFT_FULL = '\\';
-const BOTTOMLEFT_FULL = '/';
+export const NORMAL_DEEP = 3;
+export const HARD_DEEP = 5;
 
-function TttGameLogic(deep) {
+export const ROW_FULL = '-';
+export const COLUMN_FULL = '|';
+export const TOPLEFT_FULL = '\\';
+export const BOTTOMLEFT_FULL = '/';
+
+export default function TTTGameLogic(deep) {
     this.deep = deep ? deep : NORMAL_DEEP;
     this.createBoard();
 }
 
-TttGameLogic.prototype = {
+TTTGameLogic.prototype = {
 
     createBoard: function () {
         this.cells = [
@@ -194,19 +195,3 @@ TttGameLogic.prototype = {
         console.log('-------');
     }
 }
-
-window.TttGameLogic = TttGameLogic;
-
-window.SIZE = SIZE;
-
-window.X_STATE = X_STATE;
-window.O_STATE = O_STATE;
-window.EMPTY_STATE = EMPTY_STATE;
-
-window.NORMAL_DEEP = NORMAL_DEEP;
-window.HARD_DEEP = HARD_DEEP;
-
-window.ROW_FULL = ROW_FULL;
-window.COLUMN_FULL = COLUMN_FULL;
-window.TOPLEFT_FULL = TOPLEFT_FULL;
-window.BOTTOMLEFT_FULL = BOTTOMLEFT_FULL;

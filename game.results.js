@@ -1,8 +1,9 @@
-// TicTacToe - Pure JavaScript 
+// TicTacToe - Vanilla JavaScript 
 // Write by Trac Quang Hoa, 2018
 
 'use strict';
-function TttGameResults(container) {
+
+export default function TTTGameResults(container) {
     let wonElement,
         drawElement,
         lostElement;
@@ -56,5 +57,3 @@ function TttGameResults(container) {
         return resultValue;
     }
 }
-
-window.TttGameResults = TttGameResults;

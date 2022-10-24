@@ -1,8 +1,14 @@
-// TicTacToe - Pure JavaScript 
+// TicTacToe - Vanilla JavaScript 
 // Write by Trac Quang Hoa, 2018
 
 'use strict';
-function TttGame(boardContainer, optionsContainer, resultsContainer) {
+
+import TTTGameLogic, { X_STATE, O_STATE, EMPTY_STATE, NORMAL_DEEP } from './game.logic';
+import TTTGameOptions, { X_SYMBOL, COMPUTER_FIRST, NORMAL_LEVEL } from './game.options';
+import TTTGameResults from './game.results.js';
+import TTTGameView from './game.view.js';
+
+export default function TTTGame(boardContainer, optionsContainer, resultsContainer) {
 
     let isComputerFirst;
     let computerState;
@@ -12,9 +18,9 @@ function TttGame(boardContainer, optionsContainer, resultsContainer) {
     let isComputerTurn;
     let isPlaying;
 
-    let gameLogic = new TttGameLogic(deep);
+    let gameLogic = new TTTGameLogic(deep);
 
-    let gameOptions = new TttGameOptions(optionsContainer, (stater, userSymbol, level) => {
+    let gameOptions = new TTTGameOptions(optionsContainer, (stater, userSymbol, level) => {
         isComputerFirst = (stater === COMPUTER_FIRST);
 
         if (userSymbol === X_SYMBOL) {
@@ -31,13 +37,13 @@ function TttGame(boardContainer, optionsContainer, resultsContainer) {
             deep = HARD_DEEP;
         }
 
-        gameLogic = new TttGameLogic(deep);
+        gameLogic = new TTTGameLogic(deep);
         this.newGame();
     });
 
-    let gameResults = new TttGameResults(resultsContainer);
+    let gameResults = new TTTGameResults(resultsContainer);
 
-    let gameView = new TttGameView(boardContainer,
+    let gameView = new TTTGameView(boardContainer,
         (e, x, y) => {
             if (!isPlaying || isComputerTurn) {
                 return;
@@ -120,5 +126,3 @@ function TttGame(boardContainer, optionsContainer, resultsContainer) {
         }
     }
 }
-
-window.TttGame = TttGame;
