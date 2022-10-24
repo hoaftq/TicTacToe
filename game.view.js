@@ -1,8 +1,11 @@
-// TicTacToe - Pure JavaScript 
+// TicTacToe - Vanilla JavaScript 
 // Write by Trac Quang Hoa, 2018
 
 'use strict';
-function TttGameView(container, userPlayHandler, newGameHandler) {
+
+import { X_STATE, O_STATE, EMPTY_STATE, SIZE, ROW_FULL, COLUMN_FULL, TOPLEFT_FULL, BOTTOMLEFT_FULL } from "./game.logic";
+
+export default function TTTGameView(container, userPlayHandler, newGameHandler) {
 
     const WinEffectClass = 'ttt-won-line';
 
@@ -94,5 +97,3 @@ function TttGameView(container, userPlayHandler, newGameHandler) {
         endingDlg.style.display = 'block';
     }
 }
-
-window.TttGameView = TttGameView;
