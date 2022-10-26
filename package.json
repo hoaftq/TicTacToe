@@ -6,7 +6,9 @@
   "scripts": {
     "start": "webpack serve",
     "build": "webpack --mode=production",
-    "eslint": "eslint ./*.js"
+    "eslint": "eslint ./*.js",
+    "eslint-export-file": "eslint ./*.js -f checkstyle -o eslint.xml"
+
   },
   "repository": {
     "type": "git",
