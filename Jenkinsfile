@@ -8,6 +8,18 @@ pipeline {
                 }
             }
         }
+        stage('Run eslint') {
+            steps {
+                nodejs('nodejs14') {
+                    sh 'npm run eslint-export-file'
+                }
+            }
+            post {
+                always {
+                    recordIssues enabledForFailure: true, tools: [esLint(pattern: 'eslint.xml')]
+                }
+            }
+        }
         stage('Build') {
             steps {
                 nodejs('nodejs14') {
