@@ -72,7 +72,7 @@ export default function TTTGameOptions(container, changeHandler) {
                 optionValue.setAttribute('data-selected', true);
             }
             optionValue.appendChild(document.createTextNode(options[value]));
-            optionValue.addEventListener('click', function (e) {
+            optionValue.addEventListener('click', function () {
                 var options = option.getElementsByClassName('ttt-settings-value');
                 for (let i = 0; i < options.length; i++) {
                     options.item(i).removeAttribute('data-selected');
@@ -92,7 +92,7 @@ export default function TTTGameOptions(container, changeHandler) {
         var button = document.createElement('div');
         button.classList.add('ttt-settings-apply');
         button.innerHTML = text;
-        button.addEventListener('click', function (e) {
+        button.addEventListener('click', function () {
             changeHandler(starter, userSymbol, level);
         });
         return button;

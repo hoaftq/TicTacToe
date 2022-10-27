@@ -125,26 +125,26 @@ TTTGameLogic.prototype = {
     hasWon: function (x, y, checkingState) {
 
         // Check if every cell in row x has the value of checkingState
-        if (this.cells[x].every((value, index, array) => value === checkingState)) {
+        if (this.cells[x].every((value) => value === checkingState)) {
             return { type: ROW_FULL, value: x };
         }
 
         // Check if every cell in column y has the value of checking checkingState
-        if (this.cells.every((value, index, array) => value[y] === checkingState)) {
+        if (this.cells.every((value) => value[y] === checkingState)) {
             return { type: COLUMN_FULL, value: y };
         }
 
 
         // Check for diagonal from left top to right bottom
         if (x === y) {
-            if (this.cells.every((value, index, array) => this.cells[index][index] === checkingState)) {
+            if (this.cells.every((value, index) => this.cells[index][index] === checkingState)) {
                 return { type: TOPLEFT_FULL };
             }
         }
 
         // Check for diagonal from left bottom to right top
         if (x + y === SIZE - 1) {
-            if (this.cells.every((value, index, array) => this.cells[index][SIZE - 1 - index] === checkingState)) {
+            if (this.cells.every((value, index) => this.cells[index][SIZE - 1 - index] === checkingState)) {
                 return { type: BOTTOMLEFT_FULL };
             }
         }
@@ -161,7 +161,7 @@ TTTGameLogic.prototype = {
     },
 
     hasEmptyCell: function () {
-        return this.loopEmptyCells((x, y) => { return true; }) > 0;
+        return this.loopEmptyCells(() => true) > 0;
     },
 
     loopEmptyCells: function (callback) {
