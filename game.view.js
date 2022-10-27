@@ -20,7 +20,7 @@ export default function TTTGameView(container, userPlayHandler, newGameHandler) 
     this.create = function () {
         board = document.createElement('div');
         board.classList.add('ttt-board');
-        board.addEventListener('click', (e) => {
+        board.addEventListener('click', () => {
             newGameHandler();
         });
 
@@ -40,7 +40,7 @@ export default function TTTGameView(container, userPlayHandler, newGameHandler) 
 
         endingDlg = document.createElement('div');
         endingDlg.classList.add('ttt-ending-nofify');
-        endingDlg.addEventListener('click', (e) => {
+        endingDlg.addEventListener('click', () => {
             newGameHandler();
         });
         container.appendChild(endingDlg);

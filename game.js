@@ -3,7 +3,7 @@
 
 'use strict';
 
-import TTTGameLogic, { X_STATE, O_STATE, EMPTY_STATE, NORMAL_DEEP } from './game.logic';
+import TTTGameLogic, { X_STATE, O_STATE, EMPTY_STATE, NORMAL_DEEP, HARD_DEEP } from './game.logic';
 import TTTGameOptions, { X_SYMBOL, COMPUTER_FIRST, NORMAL_LEVEL } from './game.options';
 import TTTGameResults from './game.results.js';
 import TTTGameView from './game.view.js';
