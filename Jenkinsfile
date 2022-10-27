@@ -28,6 +28,9 @@ pipeline {
             }
         }
         stage('Deploy to S3') {
+            when {
+                branch 'master'
+            }
             steps {
                 withAWS(region: 'ap-southeast-1', credentials:'tictactoe_credential') {
                     s3Delete bucket: 'simpletictactoe', path: ''
