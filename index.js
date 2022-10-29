@@ -1,4 +1,4 @@
-import './game.css';
+import './index.css';
 import TTTGame from './game.js';
 
 var board = document.getElementById('board');

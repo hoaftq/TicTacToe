@@ -72,8 +72,6 @@ export default function TTTGame(boardContainer, optionsContainer, resultsContain
         }
     );
 
-
-
     this.initGame = function () {
         gameResults.create();
         gameView.create();

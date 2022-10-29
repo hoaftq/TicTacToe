@@ -4,6 +4,7 @@
 'use strict';
 
 import { X_STATE, O_STATE, EMPTY_STATE, SIZE, ROW_FULL, COLUMN_FULL, TOPLEFT_FULL, BOTTOMLEFT_FULL } from "./game.logic";
+import './game.view.css';
 
 export default function TTTGameView(container, userPlayHandler, newGameHandler) {
 

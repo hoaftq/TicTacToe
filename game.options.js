@@ -3,6 +3,8 @@
 
 'use strict';
 
+import './game.options.css'
+
 export const USER_FIRST = 'UserFirst';
 export const COMPUTER_FIRST = 'ComputerFirst';
 

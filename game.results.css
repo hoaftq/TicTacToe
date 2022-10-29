@@ -1,0 +1,25 @@
+.ttt-result-label,
+.ttt-result-value {
+    display: inline-block;
+    padding: 0.3em;
+    margin: 3px;
+}
+
+.ttt-result-label {
+    width: 2em;
+    background-color: transparent;
+    color: darkblue;
+}
+
+.ttt-result-value {
+    width: 3.2em;
+    text-align: center;
+    background-color: steelblue;
+    color: white;
+    font-weight: bold;
+}
+
+.ttt-result {
+    margin-bottom: 10px;
+    float: left;
+}

@@ -1,0 +1,80 @@
+.ttt-board {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 0.5vw;
+    justify-content: center;
+    align-content: center;
+    background-color: lightyellow;
+    user-select: none;
+    font-family: sans-serif;
+}
+
+.ttt-board div {
+    background-color: lightskyblue;
+    font-size: 14vw;
+    width: 22vw;
+    height: 22vw;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+@keyframes ttt-won-effect {
+    from {
+        background-color: lightskyblue;
+        color: black;
+    }
+
+    to {
+        background-color: pink;
+        color: red;
+    }
+}
+
+.ttt-won-line {
+    animation-name: ttt-won-effect;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+}
+
+.ttt-ending-nofify {
+    font-size: 8vw;
+    position: absolute;
+    cursor: pointer;
+    width: 36vw;
+    left: 29vw;
+    height: 10vw;
+    line-height: 10vw;
+    top: 26vw;
+    padding: 2vw 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: darkblue;
+    text-align: center;
+    user-select: none;
+    border-radius: 5px;
+}
+
+
+@media (min-width: 768px) {
+
+    .ttt-board {
+        grid-gap: 10px;
+    }
+
+    .ttt-board div {
+        font-size: 90px;
+        width: 160px;
+        height: 160px;
+    }
+
+    .ttt-ending-nofify {
+        font-size: 50px;
+        height: 60px;
+        line-height: 60px;
+        top: 190px;
+        width: 250px;
+        left: calc(50% - 125px);
+    }
+}

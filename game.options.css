@@ -1,0 +1,42 @@
+.ttt-settings-option {
+    margin-top: 1em;
+    float: left;
+    user-select: none;
+}
+
+.ttt-settings-label {
+    color: darkblue;
+}
+
+.ttt-settings-value {
+    display: inline-block;
+    width: 4.7em;
+    padding: 0.5em 0;
+    margin: 0.3em;
+    background-color: lightgray;
+    text-align: center;
+    cursor: pointer;
+}
+
+.ttt-settings-value[data-selected] {
+    background-color: lightblue;
+}
+
+.ttt-settings-value:hover {
+    background-color: cadetblue;
+}
+
+.ttt-settings-apply {
+    width: 4em;
+    padding: 0.5em 2em;
+    margin-top: 2.5em;
+    margin-left: 0.3em;
+    float: left;
+    background-color: darkseagreen;
+    text-align: center;
+    cursor: pointer;
+}
+
+.ttt-settings-apply:hover {
+    background-color: lightgreen;
+}
