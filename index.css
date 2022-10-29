@@ -1,0 +1,11 @@
+#board {
+    clear: both;
+    position: relative;
+}
+
+#about {
+    clear: both;
+    float: right;
+    color: gray;
+    font-size: small;
+}

@@ -3,6 +3,8 @@
 
 'use strict';
 
+import './game.results.css';
+
 export default function TTTGameResults(container) {
     let wonElement,
         drawElement,
