@@ -29,7 +29,7 @@ export default function TTTGameOptions(container, changeHandler) {
                 'starter',
                 firstPlayerOptions,
                 starter,
-                (value) => { starter = value; }));
+                (value) => { starter = value; triggerUpdates(); }));
 
         let symbolOptions = {};
         symbolOptions[X_SYMBOL] = 'X';
@@ -39,7 +39,7 @@ export default function TTTGameOptions(container, changeHandler) {
             'symbol',
             symbolOptions,
             userSymbol,
-            (value) => { userSymbol = value; }));
+            (value) => { userSymbol = value; triggerUpdates(); }));
 
         let levelOptions = {};
         levelOptions[NORMAL_LEVEL] = 'Normal';
@@ -49,11 +49,9 @@ export default function TTTGameOptions(container, changeHandler) {
             'level',
             levelOptions,
             level,
-            (value) => { level = value; }));
+            (value) => { level = value; triggerUpdates(); }));
 
-        container.appendChild(createButton('Apply'));
-
-        changeHandler(starter, userSymbol, level);
+        triggerUpdates();
     }
 
     function createOption(label, name, options, selectedValue, optionChangedHandler) {
@@ -90,13 +88,7 @@ export default function TTTGameOptions(container, changeHandler) {
         return option;
     }
 
-    function createButton(text) {
-        var button = document.createElement('div');
-        button.classList.add('ttt-settings-apply');
-        button.innerHTML = text;
-        button.addEventListener('click', function () {
-            changeHandler(starter, userSymbol, level);
-        });
-        return button;
+    function triggerUpdates() {
+        changeHandler(starter, userSymbol, level);
     }
 }

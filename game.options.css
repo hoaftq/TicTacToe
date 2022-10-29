@@ -28,19 +28,3 @@
 .ttt-settings-value:hover {
     color: white;
 }
-
-.ttt-settings-apply {
-    width: 4em;
-    padding: 0.5em 2em;
-    margin-top: 2.5em;
-    margin-left: 0.3em;
-    float: left;
-    background-color: steelblue;
-    text-align: center;
-    cursor: pointer;
-    box-shadow: 3px 3px 20px gray;
-}
-
-.ttt-settings-apply:hover {
-    color: white;
-}
