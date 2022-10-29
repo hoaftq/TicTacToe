@@ -2,10 +2,12 @@
     margin-top: 1em;
     float: left;
     user-select: none;
+    margin-right: 1rem;
 }
 
 .ttt-settings-label {
     color: darkblue;
+    font-weight: bold;
 }
 
 .ttt-settings-value {
@@ -16,6 +18,7 @@
     background-color: lightgray;
     text-align: center;
     cursor: pointer;
+    box-shadow: 3px 3px 20px gray;
 }
 
 .ttt-settings-value[data-selected] {
@@ -23,7 +26,7 @@
 }
 
 .ttt-settings-value:hover {
-    background-color: cadetblue;
+    color: white;
 }
 
 .ttt-settings-apply {
@@ -32,11 +35,12 @@
     margin-top: 2.5em;
     margin-left: 0.3em;
     float: left;
-    background-color: darkseagreen;
+    background-color: steelblue;
     text-align: center;
     cursor: pointer;
+    box-shadow: 3px 3px 20px gray;
 }
 
 .ttt-settings-apply:hover {
-    background-color: lightgreen;
+    color: white;
 }
