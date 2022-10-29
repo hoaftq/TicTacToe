@@ -17,9 +17,13 @@
     background-color: steelblue;
     color: white;
     font-weight: bold;
+    font-size: large;
+    box-shadow: 3px 3px 20px gray;
 }
 
 .ttt-result {
     margin-bottom: 10px;
     float: left;
+    font-weight: bold;
+    margin-right: 2px;
 }

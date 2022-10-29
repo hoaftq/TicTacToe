@@ -4,7 +4,6 @@
     grid-gap: 0.5vw;
     justify-content: center;
     align-content: center;
-    background-color: lightyellow;
     user-select: none;
     font-family: sans-serif;
 }
@@ -19,6 +18,7 @@
     align-content: center;
     cursor: pointer;
     border-radius: 5px;
+    box-shadow: 2px 2px 7px gray;
 }
 
 @keyframes ttt-won-effect {
