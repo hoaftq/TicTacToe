@@ -1,8 +1,6 @@
-This is an implementation of Minimax algorithm. It is responsive and supports both computer and mobile.  
-Here is how it looks like on a mobile  
-<img src="preview/TicTacToe.jpg">
+Responsive Tic-Tac-Toe game implemented using Minimax algorithm.
 
-The program is written without any library and structed after MVC pattern
+The program is structed after MVC pattern
 - **Controller**  
     *game.js* connect logic and view together
 - **Model**  
@@ -12,6 +10,10 @@ The program is written without any library and structed after MVC pattern
     - *game.options.js* Display those options below the board
     - *game.results.js* Display game results on the top
 
-### To-do list
-- [ ] Improve GUI
-- [ ] Make it be able to embed to another web page
+It uses Webpack to bundle the source code and Eslint for static code analysis.  
+There is also a pipeline with Jenkins to check the source code quality, bundle it and then deploy to a S3 bucket which you can refer to at [the link](http://simpletictactoe.s3-website-ap-southeast-1.amazonaws.com/)
+
+### How to run
+- `npm install` to install libraries
+- Run locally with `npm start`
+- Run eslint with `npm run eslint`
