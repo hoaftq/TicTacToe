@@ -1,7 +1,7 @@
 .ttt-board {
     display: grid;
     grid-template-columns: auto auto auto;
-    grid-gap: 0.5vw;
+    grid-gap: 1vw;
     justify-content: center;
     align-content: center;
     user-select: none;
@@ -10,9 +10,9 @@
 
 .ttt-board div {
     background-color: lightskyblue;
-    font-size: 14vw;
-    width: 22vw;
-    height: 22vw;
+    font-size: 16vw;
+    width: 26vw;
+    height: 26vw;
     display: grid;
     justify-content: center;
     align-content: center;
@@ -35,19 +35,20 @@
 
 .ttt-won-line {
     animation-name: ttt-won-effect;
-    animation-duration: 2s;
+    animation-duration: 1s;
     animation-fill-mode: forwards;
 }
 
 .ttt-ending-nofify {
     font-size: 8vw;
     position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
     cursor: pointer;
     width: 36vw;
-    left: 29vw;
     height: 10vw;
     line-height: 10vw;
-    top: 26vw;
     padding: 2vw 0;
     background-color: rgba(255, 255, 255, 0.8);
     color: darkblue;
@@ -57,7 +58,7 @@
 }
 
 
-@media (min-width: 768px) {
+@media (min-width: 600px) {
 
     .ttt-board {
         grid-gap: 10px;
@@ -73,8 +74,6 @@
         font-size: 50px;
         height: 60px;
         line-height: 60px;
-        top: 190px;
         width: 250px;
-        left: calc(50% - 125px);
     }
 }
