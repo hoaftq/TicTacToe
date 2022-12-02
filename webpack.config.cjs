@@ -17,9 +17,16 @@ module.exports = {
     module: {
         rules: [
             {
+                test: /\.m?js/,
+                resolve: {
+                    fullySpecified: false
+                }
+            },
+            {
                 test: /\.css$/,
                 use: ['style-loader', 'css-loader']
-            }]
+            }
+        ]
     },
     plugins: [
         new HtmlWebpackPlugin({ template: './index.html' })
