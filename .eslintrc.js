@@ -11,5 +11,8 @@ module.exports = {
     sourceType: 'module'
   },
   rules: {
-  }
+  },
+  eslintIgnore: [
+    'webpack.config.cjs'
+  ]
 }
