@@ -18,7 +18,7 @@ export const TOPLEFT_FULL = '\\';
 export const BOTTOMLEFT_FULL = '/';
 
 export default function TTTGameLogic(deep) {
-    this.deep = deep ? deep : NORMAL_DEEP;
+    this.deep = deep ?? NORMAL_DEEP;
     this.createBoard();
 }
 
@@ -37,7 +37,7 @@ TTTGameLogic.prototype = {
         if (state === X_STATE) {
             let max = -Infinity;
             this.loopEmptyCells((x, y) => {
-                let val = this.evalX(x, y, 0);
+                const val = this.evalX(x, y, 0);
                 if (val === max) {
                     candidateCells.push({ x, y });
                 } else if (val > max) {
@@ -48,7 +48,7 @@ TTTGameLogic.prototype = {
         } else {
             let min = Infinity;
             this.loopEmptyCells((x, y) => {
-                let val = this.evalO(x, y, 0);
+                const val = this.evalO(x, y, 0);
                 if (val === min) {
                     candidateCells.push({ x, y });
                 } else if (val < min) {
@@ -59,7 +59,7 @@ TTTGameLogic.prototype = {
         }
 
         // Choose a random cell in all candidate cells
-        let r = Math.floor(Math.random() * candidateCells.length);
+        const r = Math.floor(Math.random() * candidateCells.length);
         return candidateCells[r];
     },
 
@@ -75,7 +75,7 @@ TTTGameLogic.prototype = {
             ret = Infinity;
         } else {
             let val = Infinity;
-            let countEmptyCell = this.loopEmptyCells((i, j) => {
+            const countEmptyCell = this.loopEmptyCells((i, j) => {
                 val = Math.min(val, this.evalO(i, j, level + 1));
 
                 // Finish the loop by returning true
@@ -104,7 +104,7 @@ TTTGameLogic.prototype = {
             ret = -Infinity;
         } else {
             let val = -Infinity;
-            let countEmptyCell = this.loopEmptyCells((i, j) => {
+            const countEmptyCell = this.loopEmptyCells((i, j) => {
                 val = Math.max(val, this.evalX(i, j, level + 1));
 
                 // Finish the loop by returning true
@@ -165,7 +165,7 @@ TTTGameLogic.prototype = {
     },
 
     loopEmptyCells: function (callback) {
-        var count = 0;
+        let count = 0;
         for (let i = 0; i < SIZE; i++) {
             for (let j = 0; j < SIZE; j++) {
                 if (this.cells[i][j] === EMPTY_STATE) {
@@ -182,13 +182,10 @@ TTTGameLogic.prototype = {
 
     log: function () {
         for (let i = 0; i < SIZE; i++) {
-            var str = "";
+            let str = "";
             for (let j = 0; j < SIZE; j++) {
-                var temp = this.cells[i][j];
-                if (!temp) {
-                    temp = '@';
-                }
-                str += temp + ' ';
+                const state = this.cells[i][j] ?? '@';
+                str += state + ' ';
             }
             console.log(str);
         }

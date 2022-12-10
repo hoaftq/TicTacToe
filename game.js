@@ -5,8 +5,8 @@
 
 import TTTGameLogic, { X_STATE, O_STATE, EMPTY_STATE, NORMAL_DEEP, HARD_DEEP } from './game.logic';
 import TTTGameOptions, { X_SYMBOL, COMPUTER_FIRST, NORMAL_LEVEL } from './game.options';
-import TTTGameResults from './game.results.js';
-import TTTGameView from './game.view.js';
+import TTTGameResults from './game.results';
+import TTTGameView from './game.view';
 
 export default function TTTGame(boardContainer, optionsContainer, resultsContainer) {
 
@@ -18,9 +18,9 @@ export default function TTTGame(boardContainer, optionsContainer, resultsContain
     let isComputerTurn;
     let isPlaying;
 
-    let gameLogic = new TTTGameLogic(deep);
+    let gameLogic = new TTTGameLogic();
 
-    let gameOptions = new TTTGameOptions(optionsContainer, (stater, userSymbol, level) => {
+    const gameOptions = new TTTGameOptions(optionsContainer, (stater, userSymbol, level) => {
         isComputerFirst = (stater === COMPUTER_FIRST);
 
         if (userSymbol === X_SYMBOL) {
@@ -41,15 +41,15 @@ export default function TTTGame(boardContainer, optionsContainer, resultsContain
         this.newGame();
     });
 
-    let gameResults = new TTTGameResults(resultsContainer);
+    const gameResults = new TTTGameResults(resultsContainer);
 
-    let gameView = new TTTGameView(boardContainer,
+    const gameView = new TTTGameView(boardContainer,
         (e, x, y) => {
             if (!isPlaying || isComputerTurn) {
                 return;
             }
 
-            if (gameLogic.getAt(x, y) != EMPTY_STATE) {
+            if (gameLogic.getAt(x, y) !== EMPTY_STATE) {
                 return;
             }
 
@@ -91,7 +91,7 @@ export default function TTTGame(boardContainer, optionsContainer, resultsContain
     }
 
     function computerPlay() {
-        let cell = gameLogic.getBestCellFor(computerState);
+        const cell = gameLogic.getBestCellFor(computerState);
         if (cell) {
             playAt(cell.x, cell.y, computerState);
         }
@@ -102,7 +102,7 @@ export default function TTTGame(boardContainer, optionsContainer, resultsContain
     function playAt(x, y, state) {
         gameView.putAt(x, y, state);
         gameLogic.putAt(x, y, state);
-        let gameState = gameLogic.hasWon(x, y, state);
+        const gameState = gameLogic.hasWon(x, y, state);
 
         // User or computer has won
         if (gameState) {

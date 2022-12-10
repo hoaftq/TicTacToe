@@ -42,15 +42,15 @@ export default function TTTGameResults(container) {
     // }
 
     function createResult(label, value) {
-        let resultElem = document.createElement('div');
+        const resultElem = document.createElement('div');
         resultElem.classList.add('ttt-result');
 
-        let resultLabel = document.createElement('div');
+        const resultLabel = document.createElement('div');
         resultLabel.classList.add('ttt-result-label');
         resultLabel.appendChild(document.createTextNode(label));
         resultElem.appendChild(resultLabel);
 
-        let resultValue = document.createElement('div');
+        const resultValue = document.createElement('div');
         resultValue.classList.add('ttt-result-value');
         resultValue.appendChild(document.createTextNode(value));
         resultElem.appendChild(resultValue);
