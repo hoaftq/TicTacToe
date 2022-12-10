@@ -10,7 +10,7 @@ export default function TTTGameView(container, userPlayHandler, newGameHandler) 
 
     const WinEffectClass = 'ttt-won-line';
 
-    let displayStates = {};
+    const displayStates = {};
     displayStates[X_STATE] = 'X';
     displayStates[O_STATE] = 'O';
     displayStates[EMPTY_STATE] = '';
@@ -27,7 +27,7 @@ export default function TTTGameView(container, userPlayHandler, newGameHandler) 
 
         for (let i = 0; i < SIZE; i++) {
             for (let j = 0; j < SIZE; j++) {
-                let cell = document.createElement('div');
+                const cell = document.createElement('div');
                 cell.setAttribute('data-x', i);
                 cell.setAttribute('data-y', j);
                 cell.addEventListener('click', (e) => {
@@ -48,9 +48,9 @@ export default function TTTGameView(container, userPlayHandler, newGameHandler) 
     }
 
     this.clear = function () {
-        var cells = board.childNodes;
+        const cells = board.childNodes;
         for (let i = 0; i < cells.length; i++) {
-            var item = cells.item(i);
+            const item = cells.item(i);
             item.innerHTML = displayStates[EMPTY_STATE];
             item.classList.remove(WinEffectClass);
         }
@@ -59,34 +59,37 @@ export default function TTTGameView(container, userPlayHandler, newGameHandler) 
     }
 
     this.putAt = function (x, y, state) {
-        var cell = board.querySelector(`div[data-x='${x}'][data-y='${y}']`);
+        const cell = board.querySelector(`div[data-x='${x}'][data-y='${y}']`);
         cell.innerHTML = displayStates[state];
     }
 
     this.showWonEffect = function (line) {
-        let items;
         switch (line.type) {
             case ROW_FULL:
-                items = board.querySelectorAll(`div[data-x='${line.value}']`);
-                for (let i = 0; i < items.length; i++) {
-                    items.item(i).classList.add(WinEffectClass);
+                {
+                    const items = board.querySelectorAll(`div[data-x='${line.value}']`);
+                    for (let i = 0; i < items.length; i++) {
+                        items.item(i).classList.add(WinEffectClass);
+                    }
+                    break;
                 }
-                break;
             case COLUMN_FULL:
-                items = board.querySelectorAll(`div[data-y='${line.value}'`);
-                for (let i = 0; i < items.length; i++) {
-                    items.item(i).classList.add(WinEffectClass);
+                {
+                    const items = board.querySelectorAll(`div[data-y='${line.value}'`);
+                    for (let i = 0; i < items.length; i++) {
+                        items.item(i).classList.add(WinEffectClass);
+                    }
+                    break;
                 }
-                break;
             case TOPLEFT_FULL:
                 for (let i = 0; i < SIZE; i++) {
-                    let item = board.querySelector(`div[data-x='${i}'][data-y='${i}']`);
+                    const item = board.querySelector(`div[data-x='${i}'][data-y='${i}']`);
                     item.classList.add(WinEffectClass);
                 }
                 break;
             case BOTTOMLEFT_FULL:
                 for (let i = 0; i < SIZE; i++) {
-                    let item = board.querySelector(`div[data-x='${i}'][data-y='${SIZE - 1 - i}']`);
+                    const item = board.querySelector(`div[data-x='${i}'][data-y='${SIZE - 1 - i}']`);
                     item.classList.add(WinEffectClass);
                 }
                 break;

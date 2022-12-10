@@ -20,7 +20,7 @@ export default function TTTGameOptions(container, changeHandler) {
         level = NORMAL_LEVEL;
 
     this.create = function () {
-        let firstPlayerOptions = {};
+        const firstPlayerOptions = {};
         firstPlayerOptions[USER_FIRST] = 'You';
         firstPlayerOptions[COMPUTER_FIRST] = 'Computer';
         container.appendChild(
@@ -31,7 +31,7 @@ export default function TTTGameOptions(container, changeHandler) {
                 starter,
                 (value) => { starter = value; triggerUpdates(); }));
 
-        let symbolOptions = {};
+        const symbolOptions = {};
         symbolOptions[X_SYMBOL] = 'X';
         symbolOptions[O_SYMBOL] = 'O';
         container.appendChild(createOption(
@@ -41,7 +41,7 @@ export default function TTTGameOptions(container, changeHandler) {
             userSymbol,
             (value) => { userSymbol = value; triggerUpdates(); }));
 
-        let levelOptions = {};
+        const levelOptions = {};
         levelOptions[NORMAL_LEVEL] = 'Normal';
         levelOptions[HARD_LEVEL] = 'Hard';
         container.appendChild(createOption(
@@ -55,15 +55,15 @@ export default function TTTGameOptions(container, changeHandler) {
     }
 
     function createOption(label, name, options, selectedValue, optionChangedHandler) {
-        let option = document.createElement('div');
+        const option = document.createElement('div');
         option.classList.add('ttt-settings-option');
 
-        let optionLabel = document.createElement('div');
+        const optionLabel = document.createElement('div');
         optionLabel.classList.add('ttt-settings-label');
         optionLabel.appendChild(document.createTextNode(label));
         option.appendChild(optionLabel);
 
-        for (let value in options) {
+        for (const value in options) {
             let optionValue = document.createElement('div');
             optionValue.classList.add('ttt-settings-value');
             optionValue.setAttribute('name', name);
@@ -73,7 +73,7 @@ export default function TTTGameOptions(container, changeHandler) {
             }
             optionValue.appendChild(document.createTextNode(options[value]));
             optionValue.addEventListener('click', function () {
-                var options = option.getElementsByClassName('ttt-settings-value');
+                const options = option.getElementsByClassName('ttt-settings-value');
                 for (let i = 0; i < options.length; i++) {
                     options.item(i).removeAttribute('data-selected');
                 }
