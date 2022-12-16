@@ -2,6 +2,7 @@ pipeline {
     agent any
     tools {
         terraform 'terraform21207'
+        nodejs 'nodejs14'
     }
 
     stages {
@@ -43,11 +44,11 @@ pipeline {
             }
         }
 
-        stage('Build and deploy app') {
+        stage('Build and deploy game') {
             stages {
                 stage('Install dependencies') {
                     steps {
-                        nodejs('nodejs14') {
+                        dir('game') {
                             sh 'npm install'
                         }
                     }
@@ -55,7 +56,7 @@ pipeline {
 
                 stage('Run eslint') {
                     steps {
-                        nodejs('nodejs14') {
+                        dir('game') {
                             sh 'npm run eslint-export-file'
                         }
                     }
@@ -68,7 +69,7 @@ pipeline {
 
                 stage('Build') {
                     steps {
-                        nodejs('nodejs14') {
+                        dir('game') {
                             sh 'npm run build'
                         }
                     }
@@ -81,7 +82,7 @@ pipeline {
                     steps {
                         withAWS(region: 'ap-southeast-1', credentials:'tictactoe_credential') {
                             s3Delete bucket: 'simpletictactoe', path: ''
-                            s3Upload bucket: 'simpletictactoe', path: '', workingDir: 'dist', includePathPattern: '*.*'
+                            s3Upload bucket: 'simpletictactoe', path: '', workingDir: 'game/dist', includePathPattern: '*.*'
                         }
                     }
                 }
