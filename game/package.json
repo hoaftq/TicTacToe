@@ -7,8 +7,8 @@
   "scripts": {
     "start": "webpack serve",
     "build": "webpack --mode=production",
-    "eslint": "eslint ./*.js",
-    "eslint-export-file": "eslint ./*.js -f checkstyle -o eslint.xml",
+    "eslint": "eslint ./src/*.js ./test/*.js",
+    "eslint-export-file": "eslint ./src/*.js ./test/*.js -f checkstyle -o eslint.xml",
     "test": "mocha"
   },
   "repository": {
