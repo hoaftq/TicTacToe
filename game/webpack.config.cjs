@@ -2,12 +2,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: [
-        './game.options.js',
-        './game.results.js',
-        './game.view.js',
-        './game.logic.js',
-        './game.js',
-        './index.js'
+        './src/game.options.js',
+        './src/game.results.js',
+        './src/game.view.js',
+        './src/game.logic.js',
+        './src/game.js',
+        './src/index.js'
     ],
     output: {
         clean: true,
@@ -29,7 +29,7 @@ module.exports = {
         ]
     },
     plugins: [
-        new HtmlWebpackPlugin({ template: './index.html' })
+        new HtmlWebpackPlugin({ template: './src/index.html' })
     ],
     devServer: {
         static: './dist'
