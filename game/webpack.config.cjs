@@ -1,17 +1,14 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { ModuleFederationPlugin } = require('webpack').container;
 
 module.exports = {
     entry: [
-        './src/game.options.js',
-        './src/game.results.js',
-        './src/game.view.js',
-        './src/game.logic.js',
-        './src/game.js',
         './src/index.js'
     ],
     output: {
         clean: true,
         filename: '[name].js'
+        // libraryTarget: 'module'
     },
     mode: "development",
     module: {
@@ -26,12 +23,36 @@ module.exports = {
                 test: /\.css$/,
                 use: ['style-loader', 'css-loader']
             }
-        ]
+        ],
+    },
+    optimization: {
+        minimize: false
+    },
+    experiments: {
+        outputModule: true
     },
     plugins: [
-        new HtmlWebpackPlugin({ template: './src/index.html' })
+        new HtmlWebpackPlugin({
+            template: './src/index.html',
+            chunks: ['main'],
+            scriptLoading: 'module',
+            minify: true,
+        }),
+        new ModuleFederationPlugin({
+            name: 'tic-tac-toe-game',
+            filename: 'remoteEntry.js',
+            library: {
+                type: "module"
+            },
+            exposes: {
+                './tictactoe': './src/mfe/tictactoe.js',
+            },
+        }),
     ],
     devServer: {
-        static: './dist'
+        static: './dist',
+        headers: {
+            "Access-Control-Allow-Origin": "*"
+        }
     }
 }
