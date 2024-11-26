@@ -1,14 +1,16 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { ModuleFederationPlugin } = require('webpack').container;
+const path = require('path');
 
 module.exports = {
     entry: [
-        './src/index.js'
+        './src/index.js',
+        './src/mfe/tictactoe.js'
     ],
     output: {
         clean: true,
-        filename: '[name].js'
-        // libraryTarget: 'module'
+        filename: '[name].js',
+        libraryTarget: 'module'
     },
     mode: "development",
     module: {
@@ -21,7 +23,13 @@ module.exports = {
             },
             {
                 test: /\.css$/,
+                issuer: path.resolve(__dirname, 'src/index.js'),
                 use: ['style-loader', 'css-loader']
+            },
+            {
+                test: /\.css$/,
+                issuer: path.resolve(__dirname, 'src/mfe/tictactoe1.js'),
+                use: ['raw-loader']
             }
         ],
     },
