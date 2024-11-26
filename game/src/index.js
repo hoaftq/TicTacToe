@@ -1,4 +1,8 @@
 import './index.css';
+import './game.options.css'
+import './game.results.css';
+import './game.view.css';
+
 import TTTGame from './game';
 
 const board = document.getElementById('board');

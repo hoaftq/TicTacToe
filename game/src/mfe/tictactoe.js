@@ -1,5 +1,10 @@
 import TTTGame from '../game';
 
+import indexCss from 'raw-loader!./../index.css';
+import optionsCss from 'raw-loader!./../game.options.css';
+import resultsCss from 'raw-loader!./../game.results.css';
+import viewCss from 'raw-loader!./../game.view.css';
+
 class TicTacToe extends HTMLElement {
     constructor() {
         super();
@@ -7,6 +12,12 @@ class TicTacToe extends HTMLElement {
 
     connectedCallback() {
         const shadowRoot = this.attachShadow({ mode: 'open' });
+
+        [indexCss, optionsCss, resultsCss, viewCss].forEach(css => {
+            const style = document.createElement('style');
+            style.textContent = css;
+            shadowRoot.appendChild(style);
+        });
 
         const results = document.createElement("div");
         results.id = "results";
