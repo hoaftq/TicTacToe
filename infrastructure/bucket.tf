@@ -45,6 +45,15 @@ resource "aws_s3_bucket_website_configuration" "tictactoe" {
   }
 }
 
+resource "aws_s3_bucket_cors_configuration" "tictactoe" {
+  bucket = aws_s3_bucket.tictactoe.id
+
+  cors_rule {
+    allowed_methods = ["GET"]
+    allowed_origins = ["https://wonderful-field-08b40e000.6.azurestaticapps.net"]
+  }
+}
+
 output "tictactoe_url" {
   description = "url of the deployed tictactoe game"
   value       = aws_s3_bucket_website_configuration.tictactoe.website_endpoint
