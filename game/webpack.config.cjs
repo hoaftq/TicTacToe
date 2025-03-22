@@ -12,7 +12,7 @@ module.exports = {
         filename: '[name].js',
         libraryTarget: 'module'
     },
-    mode: "development",
+    mode: 'development',
     module: {
         rules: [
             {
@@ -50,7 +50,7 @@ module.exports = {
             name: 'tic-tac-toe-game',
             filename: 'remoteEntry.js',
             library: {
-                type: "module"
+                type: 'module'
             },
             exposes: {
                 './tictactoe': './src/mfe/tictactoe.js',
@@ -59,8 +59,9 @@ module.exports = {
     ],
     devServer: {
         static: './dist',
+        port: 8082,
         headers: {
-            "Access-Control-Allow-Origin": "*"
+            'Access-Control-Allow-Origin': '*'
         }
     }
 }
